@@ -1,0 +1,42 @@
+package com.storerating.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.Store;
+import com.storerating.service.StoreService;
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/stores")
+public class StoreController {
+
+    @Autowired
+    private StoreService storeService;
+
+    // Add Store
+    @PostMapping
+    public Store addStore(@RequestBody Store store) {
+        return storeService.addStore(store);
+    }
+
+    // Get All Stores
+    @GetMapping
+    public List<Store> getAllStores() {
+        return storeService.getAllStores();
+    }
+
+    // Search Store By Name
+    @GetMapping("/search/name")
+    public List<Store> searchByName(@RequestParam String name) {
+        return storeService.searchByName(name);
+    }
+
+    //
+    @GetMapping("/search/address")
+    public List<Store> searchByAddress(@RequestParam String address) {
+        return storeService.searchByAddress(address);
+    }
+}

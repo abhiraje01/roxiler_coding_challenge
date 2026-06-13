@@ -1,0 +1,63 @@
+package com.storerating.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.Store;
+import com.storerating.entity.User;
+import com.storerating.repository.RatingRepository;
+import com.storerating.repository.StoreRepository;
+import com.storerating.service.StoreService;
+import com.storerating.service.UserService;
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private StoreService storeService;
+
+    @Autowired
+    private StoreRepository storeRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
+
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @PostMapping("/add-user")
+    public User addUser(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
+
+    @GetMapping("/stores")
+    public List<Store> getAllStores() {
+        return storeService.getAllStores();
+    }
+
+    @PostMapping("/add-store")
+    public Store addStore(@RequestBody Store store) {
+        return storeService.addStore(store);
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+
+        long totalUsers = userService.getAllUsers().size();
+        long totalStores = storeRepository.count();
+        long totalRatings = ratingRepository.count();
+
+        return "Users : " + totalUsers +
+                ", Stores : " + totalStores +
+                ", Ratings : " + totalRatings;
+    }
+}

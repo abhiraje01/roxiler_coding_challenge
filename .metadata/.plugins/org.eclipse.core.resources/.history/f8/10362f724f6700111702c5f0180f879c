@@ -1,0 +1,27 @@
+package com.storerating.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.Store;
+import com.storerating.service.StoreService;
+
+@RestController
+@RequestMapping("/stores")
+public class StoreController {
+
+    @Autowired
+    private StoreService storeService;
+
+    @GetMapping("/search/name")
+    public List<Store> searchByName(@RequestParam String name) {
+        return storeService.searchByName(name);
+    }
+
+    @GetMapping("/search/address")
+    public List<Store> searchByAddress(@RequestParam String address) {
+        return storeService.searchByAddress(address);
+    }
+}

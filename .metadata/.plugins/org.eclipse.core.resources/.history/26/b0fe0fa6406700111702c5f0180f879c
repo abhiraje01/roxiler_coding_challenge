@@ -1,0 +1,32 @@
+package com.storerating.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.Rating;
+import com.storerating.entity.Store;
+import com.storerating.service.RatingService;
+import com.storerating.service.StoreService;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private StoreService storeService;
+
+    @Autowired
+    private RatingService ratingService;
+
+    @GetMapping("/stores")
+    public List<Store> getAllStores() {
+        return storeService.getAllStores();
+    }
+
+    @PostMapping("/rating")
+    public Rating submitRating(@RequestBody Rating rating) {
+        return ratingService.addRating(rating);
+    }
+}

@@ -1,0 +1,27 @@
+package com.storerating.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.Store;
+import com.storerating.service.StoreService;
+
+@RestController
+@RequestMapping("/stores")
+public class StoreController {
+
+    @Autowired
+    private StoreService storeService;
+
+    @PostMapping
+    public Store addStore(@RequestBody Store store) {
+        return storeService.addStore(store);
+    }
+
+    @GetMapping
+    public List<Store> getAllStores() {
+        return storeService.getAllStores();
+    }
+}

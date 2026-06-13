@@ -1,0 +1,5 @@
+package com.storerating.config;
+
+public class CorsConfig {
+
+}

@@ -1,0 +1,29 @@
+package com.storerating.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.User;
+import com.storerating.service.UserService;
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody User user) {
+        return userService.loginUser(
+                user.getEmail(),
+                user.getPassword()
+        );
+    }
+}

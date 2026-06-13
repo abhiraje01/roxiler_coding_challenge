@@ -1,0 +1,26 @@
+package com.storerating.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Store {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    private String email;
+
+    private String address;
+
+    @OneToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    public Store() {
+    }
+
+    // Generate Getters & Setters
+}

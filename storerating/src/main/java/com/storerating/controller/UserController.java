@@ -1,0 +1,44 @@
+package com.storerating.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.storerating.entity.Rating;
+import com.storerating.entity.Store;
+import com.storerating.service.RatingService;
+import com.storerating.service.StoreService;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private StoreService storeService;
+
+    @Autowired
+    private RatingService ratingService;
+
+    @GetMapping("/stores")
+    public List<Store> getAllStores() {
+        return storeService.getAllStores();
+    }
+
+    @PostMapping("/rating")
+    public Rating addRating(@RequestBody Rating rating) {
+        return ratingService.addRating(rating);
+    }
+
+    @PutMapping("/rating/{id}")
+    public Rating updateRating(@PathVariable Long id,
+                               @RequestBody Rating rating) {
+
+        return ratingService.updateRating(id, rating);
+    }
+
+    @GetMapping("/ratings")
+    public List<Rating> getAllRatings() {
+        return ratingService.getAllRatings();
+    }
+}

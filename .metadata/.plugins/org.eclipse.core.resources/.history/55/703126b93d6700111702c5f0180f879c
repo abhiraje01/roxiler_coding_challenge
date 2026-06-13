@@ -1,0 +1,5 @@
+package com.storerating.entity;
+
+public class User {
+
+}
